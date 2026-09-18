@@ -1,0 +1,57 @@
+{
+  "url": "https://www.fnac.com/PC-portable-HP-EliteBook-840-G8-14-Intel-Core-i5-16-Go-RAM-256-Go-SSD-Argent-Reconditionne-Grade-B/a22470972/w-4",
+  "product_id": "22470972",
+  "name": "PC portable HP EliteBook 840 G8 Full HD 14\" Intel® Core™ i5 16 Go RAM 256 Go SSD Argent Reconditionné",
+  "brand": "HP",
+  "brand_url": "https://www.fnac.com/HP/m58980/w-4",
+  "ean": "3701637874862",
+  "sku": "9329650",
+  "mpn": "50061",
+  "product_type": "PC Portable",
+  "price": 429,
+  "original_price": 699,
+  "currency": "EUR",
+  "discount_pct": "-39%",
+  "promotion_label": "Offre Fnac*",
+  "eco_tax": 4.3,
+  "availability": "conditional_4_to_12_days",
+  "in_stock": true,
+  "condition": "new",
+  "is_refurbished": true,
+  "seller": "FNAC.COM",
+  "seller_type": "fnac",
+  "other_sellers": [
+    {
+      "name": "KIATOO",
+      "price": 409,
+      "condition": "used",
+      "condition_detail": "Correct",
+      "seller_rating": 4.1,
+      "seller_sales": 4468,
+      "shipping_cost": 0,
+      "delivery": "Livré entre le 19/09 et le 22/09"
+    }
+  ],
+  "offers_new_count": 0,
+  "offers_used_count": 3,
+  "rating": 4.5,
+  "rating_count": 4,
+  "review_count": 4,
+  "categories": [
+    "Informatique",
+    "Ordinateurs portables",
+    "Par marque",
+    "PC Portable HP"
+  ],
+  "characteristics": {
+    "Marque du processeur": "INTEL",
+    "Modèle du processeur": "Intel Core i5 1145G7",
+    "Processeur": "Intel® Core™ i5 1145G7"
+  },
+  "image": "https://static.fnac-static.com/multimedia/Images/FR/MDM/b0/ef/bb/29093808/3756-1/tsp20260903173707/PC-portable-HP-EliteBook-840-G8-Full-HD-14-Intel-Core-i5-16-Go-RAM-256-Go-D-Argent-Reconditionne.jpg",
+  "images": [
+    "https://static.fnac-static.com/multimedia/Images/FR/MDM/b0/ef/bb/29093808/3756-1/tsp20260903173707/PC-portable-HP-EliteBook-840-G8-Full-HD-14-Intel-Core-i5-16-Go-RAM-256-Go-D-Argent-Reconditionne.jpg"
+  ],
+  "page_template": "fnac-nextjs",
+  "scraped_at": "2026-09-11T18:20:45Z"
+}
