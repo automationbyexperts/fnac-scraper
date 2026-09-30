@@ -1,27 +1,88 @@
-# Fnac.com Scraper: Prices, EAN, Stock, Sellers & Reviews
+# Fnac.com Scraper: Product Prices, EAN, Stock, Marketplace Sellers & Reviews (France)
 
-Scrape fnac.com products from any search, category or product URL, or by keyword with brand, category, price, seller and stock filters. Get price, list price, discount, EAN, SKU, brand, stock, marketplace sellers, ratings, reviews, specs and images. No API key needed.
+[![Run on Apify](https://img.shields.io/badge/Apify-Run%20the%20Actor-00A67E?logo=apify&logoColor=white)](https://apify.com/fayoussef/fnac-data-scraping?fpr=youssef)
+![EAN](https://img.shields.io/badge/EAN-and%20SKU-2ea44f)
+![Marketplace](https://img.shields.io/badge/Marketplace-all%20sellers-1C7ED6)
+![Search](https://img.shields.io/badge/Search-URL%20or%20keyword-8B5CF6)
+![Export](https://img.shields.io/badge/Export-JSON%20%7C%20CSV%20%7C%20Excel-F59E0B)
 
-This repo shows how to call the [Fnac.com Scraper: Prices, EAN, Stock, Sellers & Reviews](https://apify.com/fayoussef/fnac-data-scraping?fpr=youssef) Apify Actor from your own code: a Python and a JavaScript example, the input they send, and a sample of the output. Everything runs in the Apify cloud, so there is nothing to host, scale or maintain on your side.
+> ### ▶️ [Run the Fnac.com Scraper on Apify](https://apify.com/fayoussef/fnac-data-scraping?fpr=youssef)
+> Scrape **fnac.com** product data: price, list price, discount, **EAN**, SKU, brand, stock, **marketplace sellers and their prices**, ratings, reviews, full specs and images. Paste a Fnac URL or search by keyword with filters.
+
+**Fnac.com Scraper** turns fnac.com, France's largest electronics and culture retailer, into clean product data: one record per product with numeric prices, identifiers, stock, every marketplace offer and customer reviews. It is built for price monitoring, retail and competitor intelligence, EAN catalog matching and marketplace research. This repository documents the Apify Actor and gives working Python, JavaScript and cURL examples for calling it through the API.
 
 - **Run it in the browser:** [fayoussef/fnac-data-scraping on Apify](https://apify.com/fayoussef/fnac-data-scraping?fpr=youssef)
 - **Guide and docs:** [automationbyexperts.com/apify/fnac-data-scraping](https://automationbyexperts.com/apify/fnac-data-scraping)
 - **Actor ID for the API:** `fayoussef/fnac-data-scraping`
 
+## What the Fnac scraper does
+
+- **Any fnac.com page**: search results, categories, category hubs, brand pages and single products (including marketplace `/mp` listings).
+- **Search by keyword, no URL needed**: type search terms and filter by category, brand, price range, sold by Fnac, condition and stock.
+- **Every marketplace offer**: seller name, price, condition, seller rating, shipping cost and delivery time.
+- **EAN, SKU and manufacturer reference** for catalog matching.
+- **Customer reviews** with rating, title, text, date and verified purchase flag.
+- **Full spec table**, often 50+ rows for electronics.
+- **No API key, no Fnac account**: pagination, Fnac's anti-bot protection and French residential proxies are handled for you.
+
+## Output fields: what data you get
+
+One record per product. The main fields:
+
+| Field | Description |
+|---|---|
+| `name` / `url` / `brand` / `categories` | Product identity |
+| `ean` / `sku` / `mpn` | EAN barcode, Fnac reference, manufacturer part number |
+| `price` / `original_price` / `discount_pct` / `promotion_label` | Price, list price and discount |
+| `availability` / `in_stock` / `store_availability` | Online and in-store stock |
+| `seller` / `seller_type` | Who sells it (Fnac or a marketplace seller) |
+| `other_sellers` / `offers_new_count` / `offers_used_count` | Every marketplace offer |
+| `rating` / `review_count` / `reviews` | Ratings and customer reviews |
+| `characteristics` | Full technical specification table |
+| `description` / `images` | Product text and images |
+| `energy_class` / `repairability_index` / `warranty_options` | Extras |
+
+## Input
+
+Paste fnac.com URLs, or leave them empty and search by keyword:
+
+| Field | What it does |
+|---|---|
+| `start_urls` | Search, category, brand or product URLs |
+| `search_terms` | Keywords, e.g. `ordinateur portable` |
+| `category` / `brands` | Category and brand filters |
+| `min_price` / `max_price` | Price range in EUR |
+| `sold_by_fnac` / `condition` / `in_stock_only` | Seller, new or used, in stock |
+| `sort_by` | Sort order |
+| `max_depth` / `max_items` | Pages per search and total products |
+
 ## Use cases
 
+- **Price monitoring**: track Fnac prices and discounts on your products every day.
+- **Competitor intelligence**: see which marketplace sellers undercut you and by how much.
+- **EAN catalog matching**: match Fnac products to your catalog by barcode.
+- **Brand protection**: find unauthorised sellers of your brand on the Fnac marketplace.
+- **Review analysis**: collect customer reviews for product research.
+
+Ready-made examples you can run in one click:
+
 - [Scrape Fnac laptop prices, EAN and stock in France](https://apify.com/fayoussef/fnac-data-scraping/examples/fnac-laptop-prices-france?fpr=youssef): Exports every laptop in the fnac.com Tous les ordinateurs portables category with current price, crossed-out list price, discount, EAN, SKU, brand, stock status, marketplace sellers, ratings and the full spec table. Ready for price monitoring and EAN matching against Amazon.fr or Cdiscount.
-- [Find Lenovo and HP laptops under 600 EUR sold by Fnac](https://apify.com/fayoussef/fnac-data-scraping/examples/fnac-lenovo-hp-laptops-under-600?fpr=youssef): Searches fnac.com for laptops, keeps only new Lenovo and HP models under 600 EUR that are sold by Fnac and in stock, cheapest first. Each result has the price, list price, discount, EAN, stock status, rating and full specifications. Change the brands or budget to track any laptop deal.
-- [Casques Bluetooth Sony vendus par Fnac, les mieux notés](https://apify.com/fayoussef/fnac-data-scraping/examples/fnac-casques-sony-bluetooth-vendus-par-fnac?fpr=youssef): Recherche les casques et écouteurs Bluetooth Sony sur fnac.com, garde uniquement ceux vendus par Fnac et les classe par note client. Chaque produit comprend le prix, le prix barré, la remise, l'EAN, la disponibilité, la note, les avis et les caractéristiques. Changez la marque ou le mot-clé pour suivre n'importe quel produit audio.
-- [Meilleures ventes de romans policiers Fnac avec EAN](https://apify.com/fayoussef/fnac-data-scraping/examples/fnac-romans-policiers-meilleures-ventes?fpr=youssef): Recherche les romans policiers dans la catégorie Livres de fnac.com, classés par meilleures ventes. Chaque livre comprend le prix, l'EAN (ISBN), l'auteur, la disponibilité, la note, les avis et le résumé. Idéal pour les libraires et éditeurs qui suivent les prix et le classement Fnac. Changez le mot-clé pour suivre n'importe quel genre.
 
 ## Quick start
+
+### 1. In the browser (no code)
+
+1. Open the Actor on Apify and click **Try for free**.
+2. Paste a fnac.com search, category or product URL, or type search terms and pick filters.
+3. Click **Start**, then download Excel, CSV or JSON from the **Output** tab.
+
+### 2. Through the API
 
 1. Create a free [Apify account](https://console.apify.com/sign-up?fpr=youssef) and copy your API token from [Settings > Integrations](https://console.apify.com/settings/integrations).
 2. Set it as an environment variable: `export APIFY_TOKEN=...` (PowerShell: `$env:APIFY_TOKEN="..."`).
 3. Edit [`input.json`](input.json) and run one of the examples below.
 
-### Python
+#### Python
 
 ```bash
 pip install apify-client
@@ -40,7 +101,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     print(item)
 ```
 
-### JavaScript / Node.js
+#### JavaScript / Node.js
 
 ```bash
 npm install apify-client
@@ -63,7 +124,7 @@ const { items } = await client.dataset(run.defaultDatasetId).listItems();
 console.log(items);
 ```
 
-### cURL (plain HTTP)
+#### cURL (plain HTTP)
 
 Runs the Actor and returns the dataset items in one synchronous call:
 
@@ -139,18 +200,51 @@ One record, from [`sample-output.json`](sample-output.json). Export the full dat
 }
 ```
 
+## Integrations and automation
+
+- **Schedule it** daily for price and stock monitoring.
+- **Send results** to Google Sheets, Airtable, Slack, a webhook, Make, Zapier or n8n with Apify integrations.
+- **Use it from AI agents** through the Apify MCP server.
+
+## FAQ
+
+### Is there a Fnac API?
+Fnac does not offer a public product API. This Actor is a Fnac API alternative that reads the same pages a shopper sees and returns structured JSON.
+
+### Can I get the EAN of Fnac products?
+Yes. `ean` holds the GTIN barcode, plus `sku` and `mpn`.
+
+### Does it scrape Fnac marketplace sellers?
+Yes. `other_sellers` lists every offer with seller, price, condition, rating, shipping and delivery time.
+
+### Can I search Fnac by keyword?
+Yes. Use `search_terms` with category, brand, price and stock filters.
+
+### Does it work on fnacpro.com or other Fnac countries?
+It is built for fnac.com (France).
+
+### Are prices numbers or text?
+Numbers: `649,99 €` arrives as `649.99`, ready for spreadsheets.
+
+### What output formats are available?
+JSON, CSV, Excel, XML and HTML from the Apify dataset, or through the API.
+
+## Scraper Fnac en français
+
+Le **Fnac.com Scraper** extrait les produits de fnac.com : prix, prix barré, remise, **EAN**, SKU, marque, stock, **vendeurs marketplace et leurs prix**, notes, avis clients, caractéristiques et images. Collez une URL Fnac ou recherchez par mot-clé avec filtres, puis exportez en Excel, CSV ou JSON. Idéal pour la veille tarifaire et la surveillance de la concurrence. [Essayer sur Apify](https://apify.com/fayoussef/fnac-data-scraping?fpr=youssef).
+
 ## Pricing
 
 Pay per use on Apify: you are charged per event (results produced), with no subscription to this Actor. The current rate is shown on the [Actor's Store page](https://apify.com/fayoussef/fnac-data-scraping?fpr=youssef). Free-plan runs are capped; an [Apify plan](https://apify.com/pricing?fpr=youssef) unlocks full runs.
 
-## More Actors by AutomationByExperts
+## Related scrapers by AutomationByExperts
 
-- [wallapop Scraper (Spain,Italy,Portugal)](https://github.com/automationbyexperts/wallapop-scraper)
-- [Bulk AI Image Generator (NO API KEY)](https://github.com/automationbyexperts/bulk-ai-image-generator)
-- [Bulk LLM Runner GPT, Claude, Perplexity, Kimi (No API Key)](https://github.com/automationbyexperts/bulk-llm-runner)
-- [AutoTrader Canada Car Scraper: Prices, VIN, Mileage & Dealers](https://github.com/automationbyexperts/autotrader-canada-scraper)
-- [Spitogatos.gr Scraper: Greek Property Listings & Agent Phones](https://github.com/automationbyexperts/spitogatos-scraper)
-- [Canada411 Scraper: Business Phones, Addresses](https://github.com/automationbyexperts/canada411-scraper)
+- [Wallapop Scraper: Spain, France, Italy, Portugal & UK](https://github.com/automationbyexperts/wallapop-scraper)
+- [Bulk AI Image Generator: Nano Banana & GPT Image](https://github.com/automationbyexperts/bulk-ai-image-generator)
+- [Bulk LLM Runner: ChatGPT, Claude & Gemini in Bulk](https://github.com/automationbyexperts/bulk-llm-runner)
+- [AutoTrader.ca Scraper: Canada Car Listings, VIN & Dealers](https://github.com/automationbyexperts/autotrader-canada-scraper)
+- [Spitogatos.gr Scraper: Greek Real Estate Listings](https://github.com/automationbyexperts/spitogatos-scraper)
+- [Canada411 Scraper: Phone Numbers & Addresses](https://github.com/automationbyexperts/canada411-scraper)
 - [Full catalog of our web scraping APIs](https://github.com/automationbyexperts/web-scraping-apis)
 
 ## Support
